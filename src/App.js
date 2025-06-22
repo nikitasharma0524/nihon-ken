@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import HomePage from "./HomePage";
+import { fetchPrefectures } from "./api";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [prefectures, setPrefectures] = useState([]);
+
+  useEffect(() => {
+    fetchPrefectures()
+      .then((res) => {
+        console.log("Fetched data:", res); // ← You’ll probably see res.result
+        setPrefectures(res.prefectures); // ✅ Use only the array part
+      })
+      .catch((err) => {
+        console.error("Failed to fetch prefectures", err);
+      });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HomePage prefectures={prefectures} />
     </div>
   );
 }
