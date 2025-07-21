@@ -14,7 +14,6 @@ const HomePage = ({ prefectures }) => {
           src="/assets/pexels-liger-pham-232622-1108701.jpg"
           alt=""
         />
-
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 text-center text-white w-full">
           <h1 className="text-6xl font-bold mb-4">
             Discover Japan’s 47 Prefectures.
