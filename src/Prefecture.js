@@ -38,16 +38,14 @@ const Prefecture = ({ name, capital, description, region, onViewDetails }) => {
         </span>
       </div>
 
-      <div className="text-left m-2 flex-grow">
-        <span className="font-bold text-lg">{name}</span>
-        <div className="text-sm mt-1 text-gray-700">{capital}</div>
-        <p className="text-sm mt-2 text-gray-600">{description}</p>
+      <div className="text-left m-4 flex-grow">
+        <span className="font-bold text-xl">{name}</span>
+        <div className="text-sm mt-1 text-gray-900"> Capital - {capital}</div>
       </div>
-
       <div className="mt-auto">
         <button
           onClick={onViewDetails}
-          className="px-4 py-2 bg-red-50 shadow mt-4 w-full font-semibold text-sm hover:bg-blue-700 hover:text-white transition rounded-b-md"
+          className="px-4 py-4 bg-red-50 shadow mt-2 w-full font-semibold text-sm hover:bg-blue-700 hover:text-white transition rounded-b-md"
         >
           View Details
         </button>

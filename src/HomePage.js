@@ -1,7 +1,7 @@
-import React from "react";
 import Nav from "./Nav";
 import SectionInfo from "./SectionInfo";
 import Prefectures from "./Prefectures";
+import ChatBotButton from "./ChatBot";
 
 const HomePage = ({ prefectures }) => {
   return (
@@ -26,7 +26,7 @@ const HomePage = ({ prefectures }) => {
           </button>
         </div>
       </div>
-
+      <ChatBotButton />
       <SectionInfo />
       <Prefectures prefectures={prefectures} />
     </div>
