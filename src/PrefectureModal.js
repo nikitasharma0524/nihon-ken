@@ -31,7 +31,6 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
           ✕
         </button>
 
-        {/* Show image once it's loaded */}
         {image && (
           <img
             src={image}
@@ -61,7 +60,10 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
             {prefecture.food || "Wanko Soba, Morioka Reimen"}
           </p>
           <p>
-            🧭 <strong>Region:</strong> {prefecture.region}
+            🧭 <strong>Interesting Fact:</strong> {prefecture.interestingFact}
+          </p>
+          <p>
+            <strong>Region:</strong> {prefecture.region}
           </p>
         </div>
       </div>
