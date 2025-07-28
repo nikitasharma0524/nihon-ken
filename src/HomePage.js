@@ -10,33 +10,37 @@ const HomePage = ({ prefectures }) => {
   const handleExploreClick = () => {
     prefecturesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
   return (
     <div>
       <Nav />
+
       {/* Hero Section */}
       <div className="relative">
         <img
           className="h-screen object-cover w-full"
           src="/assets/pexels-liger-pham-232622-1108701.jpg"
-          alt=""
+          alt="Japan scenic background"
         />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 text-center text-white w-full">
-          <h1 className="text-6xl font-bold mb-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white bg-black/40">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Discover Japan’s 47 Prefectures.
           </h1>
-          <h2 className="text-2xl font-bold mb-4">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-6">
             Explore the unique culture, history, and beauty of each region.
           </h2>
           <button
             onClick={handleExploreClick}
-            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300"
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded shadow-md transition duration-300 text-sm sm:text-base"
           >
             Explore
           </button>
         </div>
       </div>
+
       <ChatBotButton />
       <SectionInfo />
+
       <div ref={prefecturesRef}>
         <Prefectures prefectures={prefectures} />
       </div>
