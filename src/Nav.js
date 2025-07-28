@@ -7,8 +7,8 @@ const Nav = () => {
         <span className="text-2xl font-bold cursor-pointer">NihonKen</span>
       </div>
       <div className="flex gap-4">
-        <span className="cursor-pointer">Home</span>
-        <span className="cursor-pointer">Regions</span>
+        {/* <span className="cursor-pointer">Home</span>
+        <span className="cursor-pointer">Regions</span> */}
       </div>
     </div>
   );
