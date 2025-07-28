@@ -22,7 +22,7 @@ const Prefecture = ({ name, capital, description, region, onViewDetails }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="bg-white w-[20%] rounded-md m-4 shadow-xl flex flex-col justify-between"
+      className="bg-white w-full sm:w-[47%] md:w-[30%] lg:w-[22%] rounded-md m-2 shadow-xl flex flex-col justify-between"
     >
       <div className="relative">
         {image && (

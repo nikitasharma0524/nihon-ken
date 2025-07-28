@@ -25,7 +25,7 @@ const Prefectures = ({ prefectures }) => {
   });
 
   return (
-    <div className="px-4 sm:px-12 py-6">
+    <div>
       <div className="max-w-3xl mx-auto">
         <input
           type="text"
@@ -36,8 +36,7 @@ const Prefectures = ({ prefectures }) => {
         />
       </div>
 
-      {/* 📍 Prefecture Grid */}
-      <div className="flex flex-wrap gap-8 mt-10 justify-center">
+      <div className="flex flex-wrap gap-6 mt-10 justify-center max-w-7xl mx-auto">
         {filtered.length > 0 ? (
           filtered.map((pref) => (
             <Prefecture

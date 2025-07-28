@@ -1,9 +1,15 @@
+import React, { useRef } from "react";
 import Nav from "./Nav";
 import SectionInfo from "./SectionInfo";
 import Prefectures from "./Prefectures";
 import ChatBotButton from "./ChatBot";
 
 const HomePage = ({ prefectures }) => {
+  const prefecturesRef = useRef(null);
+
+  const handleExploreClick = () => {
+    prefecturesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div>
       <Nav />
@@ -21,14 +27,19 @@ const HomePage = ({ prefectures }) => {
           <h2 className="text-2xl font-bold mb-4">
             Explore the unique culture, history, and beauty of each region.
           </h2>
-          <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300">
+          <button
+            onClick={handleExploreClick}
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300"
+          >
             Explore
           </button>
         </div>
       </div>
       <ChatBotButton />
       <SectionInfo />
-      <Prefectures prefectures={prefectures} />
+      <div ref={prefecturesRef}>
+        <Prefectures prefectures={prefectures} />
+      </div>
     </div>
   );
 };
