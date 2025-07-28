@@ -15,7 +15,7 @@ export default function ChatBotButton() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5001/api/ask", {
+      const res = await fetch("https://nihonken.onrender.com/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
