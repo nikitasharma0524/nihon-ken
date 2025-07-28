@@ -10,8 +10,8 @@ function App() {
   useEffect(() => {
     fetchPrefectures()
       .then((res) => {
-        console.log("Fetched data:", res); // ← You’ll probably see res.result
-        setPrefectures(res.prefectures); // ✅ Use only the array part
+        console.log("Fetched data:", res);
+        setPrefectures(res.prefectures);
       })
       .catch((err) => {
         console.error("Failed to fetch prefectures", err);
