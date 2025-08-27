@@ -2,7 +2,7 @@ import React from "react";
 
 const Nav = () => {
   return (
-    <div className="flex z-10 justify-between fixed top-0 left-0 w-full items-center text-center bg-white h-12 p-4">
+    <div className="flex z-10 justify-between fixed top-0 left-0 w-full items-center text-center text-white h-12 p-4 mt-6 ml-2">
       <div>
         <span className="text-2xl font-bold cursor-pointer">NihonKen</span>
       </div>
