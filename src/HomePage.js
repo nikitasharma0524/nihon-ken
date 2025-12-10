@@ -1,77 +1,160 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Nav from "./Nav";
 import SectionInfo from "./SectionInfo";
 import Prefectures from "./Prefectures";
 import ChatBotButton from "./ChatBot";
 
-// Hero replicates the reference: left-aligned heading + subhead and an outline button,
-// soft red-to-dark gradient over a grainy background, with a lantern photo card on the right.
 export default function HomePage({ prefectures }) {
   const prefecturesRef = useRef(null);
+  const heroRef = useRef(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   const handleExploreClick = () => {
     prefecturesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Subtle mouse parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({
+        x: (e.clientX - window.innerWidth / 2) / 50,
+        y: (e.clientY - window.innerHeight / 2) / 50,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-neutral-900">
       <Nav />
 
       {/* Hero */}
       <section
+        ref={heroRef}
         className="relative min-h-[85vh] md:min-h-screen overflow-hidden text-white"
-        style={{
-          backgroundImage: "url('/assets/nihonkenbg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
       >
-        {/* Background image */}
+        {/* Parallax Background - Main */}
+        <motion.div
+          style={{ y }}
+          className="absolute inset-0 w-full h-[120%]"
+        >
+          <div
+            className="w-full h-full"
+            style={{
+              backgroundImage: "url('/assets/nihonkenbg.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </motion.div>
 
-        {/* Film + red gradient overlay */}
-        <div className="absolute inset-0 bg-black/30" />
-
-        {/* <div className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-40" style={{ backgroundImage: "url(/assets/noise.png)" }} /> */}
+        {/* Full Background - Lanterns overlay */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 0.5 }}
+          className="absolute inset-0 w-full h-full"
+        >
+          <div
+            className="absolute inset-0 w-full h-full"
+            style={{
+              backgroundImage: "url('/assets/japan-lanterns.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          {/* Blending gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-black/30" />
+          <div className="absolute inset-0 bg-black/40" />
+        </motion.div>
 
         {/* Content */}
-        <div className="relative z-10 mx-auto flex h-full min-h-[85vh] max-w-7xl items-center px-6 md:px-10 text-white">
+        <motion.div
+          style={{ opacity }}
+          className="relative z-10 mx-auto flex h-full min-h-[85vh] max-w-7xl items-center px-6 md:px-10 text-white"
+        >
           <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-2">
             {/* Left copy */}
             <div className="max-w-2xl text-left">
-              <div className="mb-8 text-left">
-                <h1 className="font-serif text-3xl leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
-                  Discover Japan’s 47 Prefectures.
-                </h1>
-                <p className="mt-4 text-base leading-relaxed text-neutral-200 sm:text-lg md:text-xl">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-8 text-left"
+              >
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="font-serif text-3xl leading-tight sm:text-4xl md:text-5xl lg:text-6xl"
+                >
+                  Discover Japan's 47 Prefectures.
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="mt-4 text-base leading-relaxed text-neutral-200 sm:text-lg md:text-xl"
+                >
                   Explore the unique culture, history, and beauty of each
                   region.
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
-              <button
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                whileTap={{ scale: 0.95 }}
                 onClick={handleExploreClick}
-                className="inline-flex items-center justify-center rounded-md border border-white/70 px-5 py-2.5 text-sm font-medium tracking-wide backdrop-blur transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50"
+                className="group inline-flex items-center justify-center rounded-md border-2 border-white/70 px-6 py-3 text-sm font-medium tracking-wide backdrop-blur transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Find out more"
               >
                 Find out more
-              </button>
+                <motion.span
+                  className="ml-2 inline-block"
+                  animate={{ y: [0, 3, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  ↓
+                </motion.span>
+              </motion.button>
             </div>
 
-            {/* Right photo card */}
-            <div className="relative hidden md:block">
-              <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-black/10 blur-2xl" />
-              <div className="relative ml-auto w-full max-w-[520px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                <img
-                  src="/assets/japan-lanterns.jpg"
-                  alt="Narrow alley with Japanese lanterns"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
+            {/* Right side - empty for balance */}
+            <div className="hidden md:block" />
           </div>
-        </div>
+        </motion.div>
 
-        {/* Corner chat bubble space – your <ChatBotButton /> renders later */}
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/70 text-xs tracking-widest"
+          >
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-[10px] uppercase">Scroll</span>
+              <span className="text-2xl">↓</span>
+            </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <ChatBotButton />

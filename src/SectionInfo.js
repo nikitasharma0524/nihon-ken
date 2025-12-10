@@ -1,4 +1,35 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+
+const CountUpAnimation = ({ end, duration = 2 }) => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(null);
+  const isInView = useInView(countRef, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime;
+    let animationFrame;
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = (timestamp - startTime) / (duration * 1000);
+
+      if (progress < 1) {
+        setCount(Math.floor(end * progress));
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        setCount(end);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, isInView]);
+
+  return <span ref={countRef}>{count.toLocaleString()}</span>;
+};
 
 const SectionInfo = () => {
   const infoData = [
@@ -6,41 +37,80 @@ const SectionInfo = () => {
       id: 1,
       value: 47,
       label: "Total Prefectures",
-      icon: "../assets/population.svg",
+      icon: "🗾",
     },
     {
       id: 2,
       value: 125800000,
       label: "Total Population",
-      icon: "../assets/population.svg",
+      icon: "👥",
     },
     {
       id: 3,
       value: 377975,
-      label: "Total Area",
-      icon: "../assets/population.svg",
+      label: "Total Area (km²)",
+      icon: "🗺️",
     },
     {
       id: 4,
       value: 1718,
       label: "Municipalities",
-      icon: "../assets/population.svg",
+      icon: "🏛️",
     },
   ];
+
   return (
-    <div className="flex flex-wrap gap-10 justify-center mt-10 mb-10 w-full">
-      {infoData.map((item) => (
-        <div
-          key={item.id}
-          className="flex gap-4 items-center bg-white shadow-lg rounded-lg p-4 w-64"
-        >
-          <img className="w-8 h-8" src={item.icon} alt={item.label} />
-          <div className="text-left">
-            <h1 className="font-bold text-xl">{item.value}</h1>
-            <p className="text-gray-600 text-sm">{item.label}</p>
-          </div>
-        </div>
-      ))}
+    <div className="bg-gradient-to-b from-neutral-900 via-amber-950/40 to-neutral-900 py-20 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-12"
+      >
+        <h2 className="font-serif text-3xl md:text-4xl text-amber-50 mb-3">
+          Japan by the Numbers
+        </h2>
+        <p className="text-amber-100 text-sm md:text-base">
+          Discover the rich diversity across the nation
+        </p>
+      </motion.div>
+
+      <div className="flex flex-wrap gap-6 justify-center max-w-6xl mx-auto">
+        {infoData.map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{
+              y: -8,
+              transition: { duration: 0.3 }
+            }}
+            className="group relative bg-neutral-800/90 backdrop-blur-sm shadow-xl rounded-2xl p-6 w-72 border border-amber-900/50 hover:border-amber-800/70 transition-all overflow-hidden"
+          >
+            {/* Subtle gradient overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+            <div className="relative z-10 flex gap-4 items-center">
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                transition={{ duration: 0.5 }}
+                className="text-5xl"
+              >
+                {item.icon}
+              </motion.div>
+              <div className="text-left">
+                <h1 className="font-bold text-3xl text-amber-50">
+                  <CountUpAnimation end={item.value} />
+                </h1>
+                <p className="text-amber-200 text-sm mt-1">{item.label}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 };
