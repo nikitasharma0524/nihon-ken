@@ -81,9 +81,9 @@ export default function HomePage({ prefectures }) {
         {/* Content */}
         <motion.div
           style={{ opacity }}
-          className="relative z-10 mx-auto flex h-full min-h-[85vh] max-w-7xl items-center px-6 md:px-10 text-white"
+          className="relative z-10 mx-auto flex h-full min-h-[85vh] max-w-7xl items-center px-4 sm:px-6 md:px-10 text-white"
         >
-          <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-2">
+          <div className="grid w-full grid-cols-1 items-center gap-6 sm:gap-8 md:gap-10 md:grid-cols-2">
             {/* Left copy */}
             <div className="max-w-2xl text-left">
               <motion.div
@@ -104,7 +104,7 @@ export default function HomePage({ prefectures }) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
-                  className="mt-4 text-base leading-relaxed text-neutral-200 sm:text-lg md:text-xl"
+                  className="mt-3 sm:mt-4 text-sm leading-relaxed text-neutral-200 sm:text-base md:text-lg lg:text-xl"
                 >
                   Explore the unique culture, history, and beauty of each
                   region.
@@ -118,7 +118,7 @@ export default function HomePage({ prefectures }) {
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleExploreClick}
-                className="group inline-flex items-center justify-center rounded-md border-2 border-white/70 px-6 py-3 text-sm font-medium tracking-wide backdrop-blur transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
+                className="group inline-flex items-center justify-center rounded-md border-2 border-white/70 px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-medium tracking-wide backdrop-blur transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Find out more"
               >
                 Find out more
@@ -142,7 +142,7 @@ export default function HomePage({ prefectures }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
+          className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 z-20 hidden sm:block"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}

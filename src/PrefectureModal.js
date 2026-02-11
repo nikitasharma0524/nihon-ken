@@ -30,7 +30,7 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-md flex justify-center items-center z-50 p-4 overflow-y-auto"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md flex justify-center items-center z-50 p-2 sm:p-4 overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
@@ -45,7 +45,7 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
             <motion.button
               whileHover={{ scale: 1.1, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
-              className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-neutral-900/80 hover:bg-amber-900/60 text-amber-100 text-2xl font-bold transition-colors border border-amber-900/50 shadow-lg"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-neutral-900/80 hover:bg-amber-900/60 text-amber-100 text-xl sm:text-2xl font-bold transition-colors border border-amber-900/50 shadow-lg"
               onClick={onClose}
             >
               ✕
@@ -63,7 +63,7 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
                 <img
                   src={image}
                   alt={prefecture.name}
-                  className="w-full h-72 object-cover"
+                  className="w-full h-48 sm:h-60 md:h-72 object-cover"
                 />
               </motion.div>
             )}
@@ -73,11 +73,11 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.4 }}
-              className="p-6 sm:p-8"
+              className="p-4 sm:p-6 md:p-8"
             >
               {/* Title Section */}
-              <div className="mb-5">
-                <h2 className="text-3xl sm:text-4xl font-bold mb-2 text-amber-50 font-serif">
+              <div className="mb-4 sm:mb-5">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-amber-50 font-serif">
                   {prefecture.name}
                 </h2>
 
@@ -114,10 +114,10 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
               </motion.a>
 
               {/* Details Grid */}
-              <div className="space-y-2">
-                <div className="bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 p-3.5 rounded-2xl border border-amber-900/30 backdrop-blur-sm">
-                  <div className="flex items-start gap-3">
-                    <span className="text-xl flex-shrink-0">🥘</span>
+              <div className="space-y-2 sm:space-y-2.5">
+                <div className="bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 p-3 sm:p-3.5 rounded-2xl border border-amber-900/30 backdrop-blur-sm">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <span className="text-lg sm:text-xl flex-shrink-0">🥘</span>
                     <div>
                       <strong className="text-amber-200 text-sm block mb-0.5 flex">
                         Famous Food
@@ -129,9 +129,9 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 p-3.5 rounded-2xl border border-amber-900/30 backdrop-blur-sm">
-                  <div className="flex items-start gap-3">
-                    <span className="text-xl flex-shrink-0">🧭</span>
+                <div className="bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 p-3 sm:p-3.5 rounded-2xl border border-amber-900/30 backdrop-blur-sm">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <span className="text-lg sm:text-xl flex-shrink-0">🧭</span>
                     <div>
                       <strong className="text-amber-200 text-sm block mb-0.5 flex">
                         Interesting Fact
@@ -143,9 +143,9 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 p-3.5 rounded-2xl border border-amber-900/30 backdrop-blur-sm">
-                  <div className="flex items-start gap-3">
-                    <span className="text-xl flex-shrink-0">🗺️</span>
+                <div className="bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 p-3 sm:p-3.5 rounded-2xl border border-amber-900/30 backdrop-blur-sm">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
+                    <span className="text-lg sm:text-xl flex-shrink-0">🗺️</span>
                     <div>
                       <strong className="text-amber-200 text-sm block mb-0.5 flex">
                         Region

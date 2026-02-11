@@ -23,7 +23,7 @@ const Prefecture = ({ name, capital, description, region, index, onViewDetails }
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: "easeOut", delay: (index % 12) * 0.05 }}
       whileHover={{ y: -8 }}
-      className="group relative bg-neutral-800/90 backdrop-blur-sm w-full sm:w-[47%] md:w-[30%] lg:w-[22%] rounded-2xl m-2 shadow-xl border border-amber-900/50 hover:border-amber-800/70 flex flex-col justify-between overflow-hidden transition-all"
+      className="group relative bg-neutral-800/90 backdrop-blur-sm w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)] rounded-2xl shadow-xl border border-amber-900/50 hover:border-amber-800/70 flex flex-col justify-between overflow-hidden transition-all"
     >
       {/* Hover Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10" />
@@ -41,27 +41,27 @@ const Prefecture = ({ name, capital, description, region, index, onViewDetails }
           />
         )}
         {/* Region Badge */}
-        <span className="absolute top-3 right-3 bg-neutral-800/95 backdrop-blur-sm text-xs font-medium rounded-full px-3 py-1.5 shadow-lg border border-amber-900/50 text-amber-100">
+        <span className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-neutral-800/95 backdrop-blur-sm text-[10px] sm:text-xs font-medium rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg border border-amber-900/50 text-amber-100">
           {region}
         </span>
       </div>
 
       {/* Content Section */}
-      <div className="relative z-20 text-left p-5 flex-grow">
-        <h3 className="font-bold text-xl text-amber-50 mb-1">{name}</h3>
-        <div className="flex items-center gap-2 text-sm text-amber-200">
-          <span className="text-xs">🏛️</span>
+      <div className="relative z-20 text-left p-4 sm:p-5 flex-grow">
+        <h3 className="font-bold text-lg sm:text-xl text-amber-50 mb-1">{name}</h3>
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-amber-200">
+          <span className="text-[10px] sm:text-xs">🏛️</span>
           <span>{capital}</span>
         </div>
       </div>
 
       {/* View Details Button */}
-      <div className="relative z-20 mt-auto p-4 pt-0">
+      <div className="relative z-20 mt-auto p-3 sm:p-4 pt-0">
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={onViewDetails}
-          className="w-full py-3 px-4 bg-amber-900/70 text-amber-50 text-sm font-medium rounded-full hover:bg-amber-800/80 transition-all duration-300 shadow-md flex items-center justify-center gap-2 group/btn border border-amber-900/50"
+          className="w-full py-2.5 sm:py-3 px-3 sm:px-4 bg-amber-900/70 text-amber-50 text-xs sm:text-sm font-medium rounded-full hover:bg-amber-800/80 transition-all duration-300 shadow-md flex items-center justify-center gap-2 group/btn border border-amber-900/50"
         >
           <span>View Details</span>
           <motion.span

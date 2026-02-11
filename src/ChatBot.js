@@ -55,7 +55,7 @@ export default function ChatBotButton() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <>
       <AnimatePresence>
         {!isOpen ? (
           <motion.button
@@ -63,74 +63,91 @@ export default function ChatBotButton() {
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             exit={{ scale: 0, rotate: 180 }}
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="relative bg-neutral-800/95 backdrop-blur-md text-amber-50 p-4 rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 border-2 border-amber-900/50"
+            className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-amber-800 to-amber-900 text-white p-5 rounded-full shadow-2xl hover:shadow-amber-800/50 transition-all duration-300 border-2 border-amber-700"
           >
             <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity, repeatDelay: 2 }}
             >
               <span className="text-3xl">🏯</span>
             </motion.div>
             {/* Notification pulse */}
             <motion.div
-              className="absolute -top-1 -right-1 w-3 h-3 bg-amber-800 rounded-full border-2 border-neutral-800"
-              animate={{ scale: [1, 1.2, 1] }}
+              className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-lg"
+              animate={{ scale: [1, 1.3, 1], opacity: [1, 0.8, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </motion.button>
         ) : (
           <motion.div
             key="chat-window"
-            initial={{ scale: 0.8, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.8, opacity: 0, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="w-96 h-[600px] flex flex-col bg-neutral-800/95 backdrop-blur-md border-2 border-amber-900/50 shadow-2xl rounded-2xl overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[420px] sm:h-[650px] z-50 flex flex-col bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 sm:rounded-3xl overflow-hidden shadow-2xl sm:border-2 sm:border-amber-800/60"
           >
             {/* Header */}
             <motion.div
-              initial={{ y: -50 }}
-              animate={{ y: 0 }}
-              className="relative flex items-center justify-between px-6 py-4 bg-neutral-800/90 backdrop-blur-md text-amber-50 border-b border-amber-900/50"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="relative flex items-center justify-between px-5 py-4 bg-gradient-to-r from-amber-900/40 via-amber-800/30 to-amber-900/40 backdrop-blur-xl text-amber-50 border-b border-amber-700/50 shadow-lg"
             >
               <div className="flex items-center gap-3">
                 <motion.div
-                  animate={{ rotate: [0, 5, -5, 0] }}
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
                   transition={{ duration: 3, repeat: Infinity }}
-                  className="text-3xl"
+                  className="text-3xl filter drop-shadow-lg"
                 >
                   🏯
                 </motion.div>
                 <div>
-                  <h3 className="font-bold text-lg">NihonKen AI</h3>
-                  <p className="text-xs text-amber-200/70">Your Japan Expert</p>
+                  <h3 className="font-bold text-lg tracking-wide">NihonKen AI</h3>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
+                    <p className="text-xs text-amber-100/80 font-medium">Online</p>
+                  </div>
                 </div>
               </div>
 
               <motion.button
-                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileHover={{ scale: 1.15, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-amber-900/30 transition-colors"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-amber-900/40 hover:bg-amber-800/60 transition-all border border-amber-700/50 shadow-md"
               >
-                <span className="text-xl font-bold text-amber-200">×</span>
+                <span className="text-2xl font-light text-amber-100">×</span>
               </motion.button>
             </motion.div>
 
             {/* Chat Messages */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-neutral-900">
+            <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-800/40 via-neutral-900 to-neutral-900">
               {chatHistory.length === 0 && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center text-amber-200/70 mt-20"
+                  transition={{ delay: 0.2 }}
+                  className="text-center mt-20 sm:mt-32"
                 >
-                  <div className="text-6xl mb-4">🗾</div>
-                  <p className="text-sm font-medium text-amber-100">Ask me anything about Japan!</p>
-                  <p className="text-xs mt-2 text-amber-200/50">Prefectures, culture, food, and more...</p>
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.05, 1],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="text-7xl mb-6 filter drop-shadow-2xl"
+                  >
+                    🗾
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-amber-50 mb-2">Welcome to NihonKen AI</h3>
+                  <p className="text-sm text-amber-200/80 mb-1">Ask about Japan's prefectures!</p>
+                  <p className="text-xs text-amber-300/50">Culture • History • Food • Places</p>
                 </motion.div>
               )}
 
@@ -146,12 +163,13 @@ export default function ChatBotButton() {
                 >
                   {/* Avatar */}
                   <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-lg ${
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-xl shadow-lg ${
                       msg.role === "user"
-                        ? "bg-amber-900/50"
-                        : "bg-neutral-800 border border-amber-900/50"
+                        ? "bg-gradient-to-br from-amber-700 to-amber-900 border-2 border-amber-600"
+                        : "bg-gradient-to-br from-neutral-700 to-neutral-800 border-2 border-amber-700/50"
                     }`}
                   >
                     {msg.role === "user" ? "👤" : "🏯"}
@@ -159,14 +177,15 @@ export default function ChatBotButton() {
 
                   {/* Message Bubble */}
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className={`max-w-[75%] text-sm p-3 rounded-2xl shadow-sm ${
+                    initial={{ opacity: 0, x: msg.role === "user" ? 20 : -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className={`max-w-[80%] p-3.5 rounded-2xl shadow-lg backdrop-blur-sm ${
                       msg.role === "user"
-                        ? "bg-amber-900/50 text-amber-50 rounded-br-sm"
-                        : "bg-neutral-800 text-amber-50 rounded-bl-sm border border-amber-900/50"
+                        ? "bg-gradient-to-br from-amber-800/80 to-amber-900/90 text-amber-50 rounded-br-md border border-amber-700/50"
+                        : "bg-gradient-to-br from-neutral-800/90 to-neutral-900/90 text-amber-50 rounded-bl-md border border-amber-700/30"
                     }`}
                   >
-                    <p className="leading-relaxed">{msg.content}</p>
+                    <p className="leading-relaxed text-sm text-left whitespace-pre-wrap break-words">{msg.content}</p>
                   </motion.div>
                 </motion.div>
               ))}
@@ -178,25 +197,29 @@ export default function ChatBotButton() {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-end gap-2"
                 >
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neutral-800 border border-amber-900/50 flex items-center justify-center text-lg">
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 border-2 border-amber-700/50 flex items-center justify-center text-xl shadow-lg"
+                  >
                     🏯
-                  </div>
-                  <div className="bg-neutral-800 p-3 rounded-2xl rounded-bl-sm shadow-sm border border-amber-900/50">
-                    <div className="flex gap-1">
+                  </motion.div>
+                  <div className="bg-gradient-to-br from-neutral-800/90 to-neutral-900/90 p-4 rounded-2xl rounded-bl-md shadow-lg border border-amber-700/30">
+                    <div className="flex gap-1.5">
                       <motion.div
-                        className="w-2 h-2 bg-amber-800 rounded-full"
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                        className="w-2.5 h-2.5 bg-amber-600 rounded-full shadow-lg shadow-amber-600/50"
+                        animate={{ y: [0, -10, 0], opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 0.8, repeat: Infinity, delay: 0 }}
                       />
                       <motion.div
-                        className="w-2 h-2 bg-amber-700 rounded-full"
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.1 }}
+                        className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"
+                        animate={{ y: [0, -10, 0], opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 0.8, repeat: Infinity, delay: 0.15 }}
                       />
                       <motion.div
-                        className="w-2 h-2 bg-amber-600 rounded-full"
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                        className="w-2.5 h-2.5 bg-amber-400 rounded-full shadow-lg shadow-amber-400/50"
+                        animate={{ y: [0, -10, 0], opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 0.8, repeat: Infinity, delay: 0.3 }}
                       />
                     </div>
                   </div>
@@ -208,33 +231,45 @@ export default function ChatBotButton() {
 
             {/* Input Area */}
             <motion.div
-              initial={{ y: 50 }}
-              animate={{ y: 0 }}
-              className="border-t border-amber-900/50 p-4 bg-neutral-800/90 backdrop-blur-md"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="border-t border-amber-700/40 p-4 bg-gradient-to-t from-neutral-900 via-neutral-800/50 to-neutral-800/30 backdrop-blur-xl"
             >
-              <div className="flex items-center gap-2">
-                <input
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && !loading && handleAsk()}
-                  placeholder="Ask about Japan... 🗾"
-                  disabled={loading}
-                  className="flex-1 px-4 py-3 border border-amber-900/50 rounded-full focus:outline-none focus:border-amber-800 text-sm transition-colors disabled:bg-neutral-700 disabled:cursor-not-allowed bg-neutral-900 text-amber-50 placeholder-amber-200/50"
-                />
+              <div className="flex items-center gap-2.5">
+                <div className="flex-1 relative">
+                  <input
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && !loading && handleAsk()}
+                    placeholder="Ask about prefectures... 🏯"
+                    disabled={loading}
+                    className="w-full px-5 py-3.5 border-2 border-amber-700/40 rounded-2xl focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed bg-neutral-900/60 text-amber-50 placeholder-amber-300/40 shadow-inner"
+                  />
+                </div>
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.08, boxShadow: "0 0 20px rgba(245, 158, 11, 0.5)" }}
+                  whileTap={{ scale: 0.92 }}
                   onClick={handleAsk}
                   disabled={loading || !prompt.trim()}
-                  className="bg-amber-900/70 text-amber-50 px-5 py-3 rounded-full hover:bg-amber-800/80 text-sm font-medium shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 border border-amber-900/50"
+                  className="bg-gradient-to-br from-amber-700 to-amber-900 text-white px-6 py-3.5 rounded-2xl font-semibold shadow-lg hover:shadow-amber-700/50 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 border-2 border-amber-600/50"
                 >
-                  {loading ? "..." : "Send"}
+                  {loading ? (
+                    <motion.span
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="inline-block"
+                    >
+                      ⏳
+                    </motion.span>
+                  ) : (
+                    <span>Send</span>
+                  )}
                 </motion.button>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 }
