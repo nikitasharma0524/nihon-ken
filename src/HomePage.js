@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Nav from "./Nav";
 import SectionInfo from "./SectionInfo";
@@ -8,7 +8,6 @@ import ChatBotButton from "./ChatBot";
 export default function HomePage({ prefectures }) {
   const prefecturesRef = useRef(null);
   const heroRef = useRef(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -21,18 +20,6 @@ export default function HomePage({ prefectures }) {
   const handleExploreClick = () => {
     prefecturesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
-  // Subtle mouse parallax effect
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX - window.innerWidth / 2) / 50,
-        y: (e.clientY - window.innerHeight / 2) / 50,
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   return (
     <div className="min-h-screen bg-neutral-900">
