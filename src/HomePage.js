@@ -8,7 +8,7 @@ import ChatBotButton from "./ChatBot";
 export default function HomePage({ prefectures }) {
   const prefecturesRef = useRef(null);
   const heroRef = useRef(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -44,10 +44,7 @@ export default function HomePage({ prefectures }) {
         className="relative min-h-[85vh] md:min-h-screen overflow-hidden text-white"
       >
         {/* Parallax Background - Main */}
-        <motion.div
-          style={{ y }}
-          className="absolute inset-0 w-full h-[120%]"
-        >
+        <motion.div style={{ y }} className="absolute inset-0 w-full h-[120%]">
           <div
             className="w-full h-full"
             style={{
@@ -115,7 +112,10 @@ export default function HomePage({ prefectures }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "rgba(255,255,255,0.2)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleExploreClick}
                 className="group inline-flex items-center justify-center rounded-md border-2 border-white/70 px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-medium tracking-wide backdrop-blur transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
