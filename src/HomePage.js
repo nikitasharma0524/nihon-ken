@@ -8,7 +8,7 @@ import ChatBotButton from "./ChatBot";
 export default function HomePage({ prefectures }) {
   const prefecturesRef = useRef(null);
   const heroRef = useRef(null);
-  const [setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
