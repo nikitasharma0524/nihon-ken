@@ -1,0 +1,384 @@
+{
+  "totalPrefectures": 47,
+  "totalPopulation": 125800000,
+  "totalArea": 377975,
+  "totalMunicipalities": 1718,
+  "prefectures": [
+    {
+      "id": 1,
+      "name": "Hokkaido",
+      "capital": "Sapporo",
+      "interestingFact": "It's known for its snowy landscapes and skiing resorts.",
+      "region": "Hokkaido",
+      "food": "Jingisukan (grilled mutton), seafood (crab, uni), soup curry"
+    },
+    {
+      "id": 2,
+      "name": "Aomori",
+      "capital": "Aomori",
+      "interestingFact": "Famous for its Nebuta Festival with giant illuminated floats.",
+      "region": "Hokkaido",
+      "food": "Apple dishes, Senbei-jiru (rice cracker soup)"
+    },
+    {
+      "id": 3,
+      "name": "Iwate",
+      "capital": "Morioka",
+      "interestingFact": "Home to the famous wanko soba noodle challenge.",
+      "region": "Hokkaido",
+      "food": "Wanko soba"
+    },
+    {
+      "id": 4,
+      "name": "Miyagi",
+      "capital": "Sendai",
+      "interestingFact": "Known for gyutan (grilled beef tongue) and the Tanabata festival.",
+      "region": "Hokkaido",
+      "food": "Gyutan (grilled beef tongue)"
+    },
+    {
+      "id": 5,
+      "name": "Akita",
+      "capital": "Akita",
+      "interestingFact": "Famous for Akita dogs and Kiritanpo hot pot.",
+      "region": "Hokkaido",
+      "food": "Kiritanpo (mashed rice on sticks)"
+    },
+    {
+      "id": 6,
+      "name": "Yamagata",
+      "capital": "Yamagata",
+      "interestingFact": "Known for delicious cherries and Zao snow monsters.",
+      "region": "Hokkaido",
+      "food": "Imoni (taro stew)"
+    },
+    {
+      "id": 7,
+      "name": "Fukushima",
+      "capital": "Fukushima",
+      "interestingFact": "Home to the Aizu samurai culture and scenic Ouchi-juku.",
+      "region": "Hokkaido",
+      "food": "Kitakata ramen, Sauce katsudon"
+    },
+    {
+      "id": 8,
+      "name": "Ibaraki",
+      "capital": "Mito",
+      "interestingFact": "Famous for the Kairakuen Garden and natto (fermented soybeans).",
+      "region": "Kanto",
+      "food": "Natto (fermented soybeans)"
+    },
+    {
+      "id": 9,
+      "name": "Tochigi",
+      "capital": "Utsunomiya",
+      "interestingFact": "Nikko, a UNESCO World Heritage Site, is located here.",
+      "region": "Kanto",
+      "food": "Gyoza (Utsunomiya-style)"
+    },
+    {
+      "id": 10,
+      "name": "Gunma",
+      "capital": "Maebashi",
+      "interestingFact": "Known for hot springs like Kusatsu and Daruma dolls.",
+      "region": "Kanto",
+      "food": "Mizusawa udon"
+    },
+    {
+      "id": 11,
+      "name": "Saitama",
+      "capital": "Saitama",
+      "interestingFact": "Home to Kawagoe, a town with Edo-period architecture.",
+      "region": "Kanto",
+      "food": "Kawagoe sweet potato sweets"
+    },
+    {
+      "id": 12,
+      "name": "Chiba",
+      "capital": "Chiba",
+      "interestingFact": "Narita International Airport is located here.",
+      "region": "Kanto",
+      "food": "Peanuts, clams (hamaguri), nure senbei"
+    },
+    {
+      "id": 13,
+      "name": "Tokyo",
+      "capital": "Tokyo",
+      "interestingFact": "The most populated metropolitan area in the world.",
+      "region": "Kanto",
+      "food": "Monjayaki, sushi, tempura"
+    },
+    {
+      "id": 14,
+      "name": "Kanagawa",
+      "capital": "Yokohama",
+      "interestingFact": "Yokohama has Japan's largest Chinatown.",
+      "region": "Kanto",
+      "food": "Shumai (Yokohama), Sanmamen (noodle soup)"
+    },
+    {
+      "id": 15,
+      "name": "Niigata",
+      "capital": "Niigata",
+      "interestingFact": "Famous for high-quality rice and sake production.",
+      "region": "Chubu",
+      "food": "Koshihikari rice, hegi soba"
+    },
+    {
+      "id": 16,
+      "name": "Toyama",
+      "capital": "Toyama",
+      "interestingFact": "Known for the breathtaking Tateyama Kurobe Alpine Route.",
+      "region": "Chubu",
+      "food": "Masu sushi"
+    },
+    {
+      "id": 17,
+      "name": "Ishikawa",
+      "capital": "Kanazawa",
+      "interestingFact": "Kanazawa has one of Japan's most beautiful gardens, Kenrokuen.",
+      "region": "Chubu",
+      "food": "Jibuni (duck stew), Kanazawa curry"
+    },
+    {
+      "id": 18,
+      "name": "Fukui",
+      "capital": "Fukui",
+      "interestingFact": "Home to the famous Eiheiji Zen temple and dinosaur fossils.",
+      "region": "Chubu",
+      "food": "Sauce katsudon, Echizen soba"
+    },
+    {
+      "id": 19,
+      "name": "Yamanashi",
+      "capital": "Kofu",
+      "interestingFact": "Famous for Mt. Fuji views and grape production.",
+      "region": "Chubu",
+      "food": "Houtou noodles"
+    },
+    {
+      "id": 20,
+      "name": "Nagano",
+      "capital": "Nagano",
+      "interestingFact": "Hosted the 1998 Winter Olympics and has the famous snow monkeys.",
+      "region": "Chubu",
+      "food": "Soba, oyaki dumplings"
+    },
+    {
+      "id": 21,
+      "name": "Gifu",
+      "capital": "Gifu",
+      "interestingFact": "Shirakawa-go, a UNESCO site, is known for its thatched-roof houses.",
+      "region": "Chubu",
+      "food": "Keichan chicken, Hida beef"
+    },
+    {
+      "id": 22,
+      "name": "Shizuoka",
+      "capital": "Shizuoka",
+      "interestingFact": "Famous for green tea and the best views of Mt. Fuji.",
+      "region": "Chubu",
+      "food": "Unagi (eel), green tea, wasabi"
+    },
+    {
+      "id": 23,
+      "name": "Aichi",
+      "capital": "Nagoya",
+      "interestingFact": "Nagoya is the birthplace of Toyota.",
+      "region": "Chubu",
+      "food": "Miso katsu, hitsumabushi (grilled eel over rice)"
+    },
+    {
+      "id": 24,
+      "name": "Mie",
+      "capital": "Tsu",
+      "interestingFact": "Home to Ise Shrine, Japan's most sacred Shinto shrine.",
+      "region": "Chubu",
+      "food": "Ise udon, tekone-zushi"
+    },
+    {
+      "id": 25,
+      "name": "Shiga",
+      "capital": "Otsu",
+      "interestingFact": "Lake Biwa, Japan's largest lake, is located here.",
+      "region": "Kansai",
+      "food": "Funazushi (fermented sushi)"
+    },
+    {
+      "id": 26,
+      "name": "Kyoto",
+      "capital": "Kyoto",
+      "interestingFact": "Kyoto has over 2,000 temples and shrines.",
+      "region": "Kansai",
+      "food": "Yudofu, kaiseki cuisine"
+    },
+    {
+      "id": 27,
+      "name": "Osaka",
+      "capital": "Osaka",
+      "interestingFact": "Known as the 'Kitchen of Japan' for its street food.",
+      "region": "Kansai",
+      "food": "Takoyaki, okonomiyaki"
+    },
+    {
+      "id": 28,
+      "name": "Hyogo",
+      "capital": "Kobe",
+      "interestingFact": "Famous for Kobe beef and Himeji Castle.",
+      "region": "Kansai",
+      "food": "Kobe beef"
+    },
+    {
+      "id": 29,
+      "name": "Nara",
+      "capital": "Nara",
+      "interestingFact": "Nara has free-roaming deer at its parks and temples.",
+      "region": "Kansai",
+      "food": "Kakinoha sushi (persimmon leaf sushi)"
+    },
+    {
+      "id": 30,
+      "name": "Wakayama",
+      "capital": "Wakayama",
+      "interestingFact": "Mount Koya is a major Buddhist pilgrimage site.",
+      "region": "Kansai",
+      "food": "Meharizushi, umeboshi (pickled plums)"
+    },
+    {
+      "id": 31,
+      "name": "Tottori",
+      "capital": "Tottori",
+      "interestingFact": "Home to Japan's largest sand dunes.",
+      "region": "Chugoku",
+      "food": "Matsuba crab, nashi pears"
+    },
+    {
+      "id": 32,
+      "name": "Shimane",
+      "capital": "Matsue",
+      "interestingFact": "Izumo Taisha is one of Japan's oldest shrines.",
+      "region": "Chugoku",
+      "food": "Izumo soba"
+    },
+    {
+      "id": 33,
+      "name": "Okayama",
+      "capital": "Okayama",
+      "interestingFact": "Famous for the legend of Momotaro (Peach Boy).",
+      "region": "Chugoku",
+      "food": "Barazushi, peaches"
+    },
+    {
+      "id": 34,
+      "name": "Hiroshima",
+      "capital": "Hiroshima",
+      "interestingFact": "Site of the first atomic bomb attack in 1945.",
+      "region": "Chugoku",
+      "food": "Hiroshima-style okonomiyaki, oysters"
+    },
+    {
+      "id": 35,
+      "name": "Yamaguchi",
+      "capital": "Yamaguchi",
+      "interestingFact": "Famous for the Kintai Bridge and fugu (pufferfish) cuisine.",
+      "region": "Chugoku",
+      "food": "Fugu (pufferfish)"
+    },
+    {
+      "id": 36,
+      "name": "Tokushima",
+      "capital": "Tokushima",
+      "interestingFact": "Known for the Awa Odori dance festival.",
+      "region": "Shikoku",
+      "food": "Tokushima ramen, sudachi citrus"
+    },
+    {
+      "id": 37,
+      "name": "Kagawa",
+      "capital": "Takamatsu",
+      "interestingFact": "Famous for Sanuki udon noodles.",
+      "region": "Shikoku",
+      "food": "Sanuki udon"
+    },
+    {
+      "id": 38,
+      "name": "Ehime",
+      "capital": "Matsuyama",
+      "interestingFact": "Dogo Onsen is one of Japan's oldest hot springs.",
+      "region": "Shikoku",
+      "food": "Jakoten (fried fish paste), mikan (mandarin oranges)"
+    },
+    {
+      "id": 39,
+      "name": "Kochi",
+      "capital": "Kochi",
+      "interestingFact": "Famous for the Yosakoi dance festival.",
+      "region": "Shikoku",
+      "food": "Katsuo no tataki (seared bonito)"
+    },
+    {
+      "id": 40,
+      "name": "Fukuoka",
+      "capital": "Fukuoka",
+      "interestingFact": "Known for its Hakata ramen and lively yatai (food stalls).",
+      "region": "Kyushu + Okinawa",
+      "food": "Hakata ramen (tonkotsu)"
+    },
+    {
+      "id": 41,
+      "name": "Saga",
+      "capital": "Saga",
+      "interestingFact": "Famous for Arita and Imari porcelain.",
+      "region": "Kyushu + Okinawa",
+      "food": "Saga beef"
+    },
+    {
+      "id": 42,
+      "name": "Nagasaki",
+      "capital": "Nagasaki",
+      "interestingFact": "The only place in Japan with European-style history.",
+      "region": "Kyushu + Okinawa",
+      "food": "Champon, Castella cake"
+    },
+    {
+      "id": 43,
+      "name": "Kumamoto",
+      "capital": "Kumamoto",
+      "interestingFact": "Home to Kumamoto Castle and the cute mascot Kumamon.",
+      "region": "Kyushu + Okinawa",
+      "food": "Basashi (horse sashimi), Ikinari dango"
+    },
+    {
+      "id": 44,
+      "name": "Oita",
+      "capital": "Oita",
+      "interestingFact": "Famous for Beppu, Japan's top hot spring resort.",
+      "region": "Kyushu + Okinawa",
+      "food": "Toriten (chicken tempura), Bungo beef"
+    },
+    {
+      "id": 45,
+      "name": "Miyazaki",
+      "capital": "Miyazaki",
+      "interestingFact": "Known for Takachiho Gorge and myths of Japan's origins.",
+      "region": "Kyushu + Okinawa",
+      "food": "Chicken nanban, mangoes"
+    },
+    {
+      "id": 46,
+      "name": "Kagoshima",
+      "capital": "Kagoshima",
+      "interestingFact": "Sakurajima volcano is still active near the city.",
+      "region": "Kyushu + Okinawa",
+      "food": "Kurobuta pork, satsuma-age"
+    },
+    {
+      "id": 47,
+      "name": "Okinawa",
+      "capital": "Naha",
+      "interestingFact": "Okinawa has a distinct Ryukyu culture and long life expectancy.",
+      "region": "Kyushu + Okinawa",
+      "food": "Goya champuru, Okinawa soba, taco rice"
+    }
+  ]
+}

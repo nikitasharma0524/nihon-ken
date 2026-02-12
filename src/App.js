@@ -1,22 +1,10 @@
 import "./App.css";
-import React from "react";
 import HomePage from "./HomePage";
-import { fetchPrefectures } from "./api";
-import { useState, useEffect } from "react";
+import prefecturesData from "./data/prefectures.json";
 
 function App() {
-  const [prefectures, setPrefectures] = useState([]);
-
-  useEffect(() => {
-    fetchPrefectures()
-      .then((res) => {
-        console.log("Fetched data:", res);
-        setPrefectures(res.prefectures);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch prefectures", err);
-      });
-  }, []);
+  // Use static data directly - no API calls needed!
+  const prefectures = prefecturesData.prefectures;
 
   return (
     <div className="App">
