@@ -12,7 +12,7 @@ const Prefectures = ({ prefectures }) => {
   const closeModal = () => setSelectedPref(null);
 
   if (!Array.isArray(prefectures)) {
-    return <div className="text-red-600 text-center">Invalid data format</div>;
+    return <div className="text-center py-20" style={{ color: "#9B2335" }}>Invalid data format</div>;
   }
 
   const filtered = prefectures.filter((pref) => {
@@ -26,47 +26,59 @@ const Prefectures = ({ prefectures }) => {
   });
 
   return (
-    <div id="prefectures-section" className="bg-gradient-to-b from-neutral-900 via-amber-950/30 to-neutral-900 py-12 sm:py-16 md:py-20 px-4 pb-0">
+    <div
+      id="prefectures-section"
+      className="py-16 sm:py-20 md:py-24 px-6 sm:px-10 pb-0 border-t border-[#E5D5C8]"
+      style={{ backgroundColor: "#F5EFE6" }}
+    >
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-8 sm:mb-10 md:mb-12"
+        transition={{ duration: 0.7 }}
+        className="mb-10 sm:mb-12 text-center"
       >
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-amber-50 mb-2 sm:mb-3">
-          Explore All Prefectures
-        </h2>
-        <p className="text-amber-100 text-xs sm:text-sm md:text-base mb-6 sm:mb-8">
-          Discover the unique charm of each region
+        <p className="text-[11px] tracking-[0.25em] uppercase mb-3" style={{ color: "#9B9080" }}>
+          都道府県
         </p>
+        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl mb-8" style={{ color: "#1C1917" }}>
+          All Prefectures
+        </h2>
 
         {/* Search Bar */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-2xl mx-auto"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="max-w-lg relative mx-auto"
         >
-          <div className="relative">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by name, capital, food, or region..."
-              className="w-full bg-neutral-800/80 backdrop-blur-sm border-2 border-amber-900/50 rounded-full px-4 py-3 sm:px-6 sm:py-4 text-sm sm:text-base text-amber-50 placeholder-amber-200/50 shadow-lg focus:outline-none focus:border-amber-800 transition-all"
-            />
-            <div className="absolute right-4 sm:right-5 top-1/2 transform -translate-y-1/2 text-amber-200/70 text-base sm:text-lg">
-              🔍
-            </div>
-          </div>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search by name, capital, food, or region…"
+            className="w-full px-5 py-3 text-sm transition-all focus:outline-none"
+            style={{
+              border: "1.5px solid #C4A89A",
+              backgroundColor: "#FDF8F3",
+              color: "#1C1917",
+            }}
+            onFocus={(e) => (e.target.style.borderColor = "#9B2335")}
+            onBlur={(e) => (e.target.style.borderColor = "#C4A89A")}
+          />
+          <span
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-sm select-none"
+            style={{ color: "#A89080" }}
+          >
+            検索
+          </span>
         </motion.div>
       </motion.div>
 
-      {/* Prefectures Grid */}
-      <div className="flex flex-wrap gap-4 sm:gap-6 justify-center max-w-7xl mx-auto mb-12 sm:mb-16 md:mb-20">
+      {/* Grid */}
+      <div className="flex flex-wrap gap-4 sm:gap-5 justify-center max-w-7xl mx-auto mb-16 sm:mb-20 md:mb-24">
         {filtered.length > 0 ? (
           filtered.map((pref, index) => (
             <Prefecture
@@ -81,23 +93,17 @@ const Prefectures = ({ prefectures }) => {
           ))
         ) : (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-amber-200/70 text-base sm:text-lg mt-12 sm:mt-16 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="py-20 text-center w-full"
           >
-            <div className="text-5xl sm:text-6xl mb-4">🔍</div>
-            <p>No results found.</p>
-            <p className="text-xs sm:text-sm text-amber-200/50 mt-2">Try a different search term</p>
+            <p className="font-serif text-2xl mb-2" style={{ color: "#1C1917" }}>見つかりません</p>
+            <p className="text-sm" style={{ color: "#A89080" }}>No results found — try a different term.</p>
           </motion.div>
         )}
       </div>
 
-      <PrefectureModal
-        isOpen={!!selectedPref}
-        onClose={closeModal}
-        prefecture={selectedPref}
-      />
-
+      <PrefectureModal isOpen={!!selectedPref} onClose={closeModal} prefecture={selectedPref} />
       <Footer />
     </div>
   );

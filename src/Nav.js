@@ -2,69 +2,71 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const Nav = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const scrollToPrefectures = () => {
-    const element = document.getElementById("prefectures-section");
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollToStats = () => {
-    const element = document.getElementById("stats-section");
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToPrefectures = () =>
+    document
+      .getElementById("prefectures-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  const scrollToStats = () =>
+    document
+      .getElementById("stats-section")
+      ?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <motion.div
+    <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="flex z-50 justify-between sticky top-0 left-0 w-full items-center text-white h-14 sm:h-16 px-4 sm:px-6 bg-black/30 backdrop-blur-md"
+      transition={{ duration: 0.6 }}
+      className="flex z-50 justify-between sticky top-0 left-0 w-full items-center h-14 sm:h-16 px-6 sm:px-10 bg-[#F5EFE6]/95 backdrop-blur-sm border-b border-[#E5D5C8]"
     >
+      {/* Logo */}
       <motion.div
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.02 }}
         onClick={scrollToTop}
-        className="flex items-center gap-2"
+        className="flex items-center gap-3 cursor-pointer"
       >
-        <span className="text-2xl">🏯</span>
-        <span className="text-xl sm:text-2xl font-bold cursor-pointer drop-shadow-lg">
+        <div className="w-7 h-7 bg-[#1C1917] flex items-center justify-center">
+          <span className="text-[#F5EFE6] text-xs font-bold tracking-tight">
+            N
+          </span>
+        </div>
+        <span className="text-sm font-medium text-[#1C1917] tracking-widest uppercase">
           NihonKen
+        </span>
+        <span className="text-[#C4A89A] text-sm hidden sm:inline">｜</span>
+        <span
+          className="text-[#A89080] text-sm hidden sm:inline"
+          style={{ fontWeight: 300 }}
+        >
+          ニホンケン
         </span>
       </motion.div>
 
-      {/* Navigation Links */}
-      <div className="flex items-center gap-3 sm:gap-6">
+      {/* Links */}
+      <div className="flex items-center gap-6 sm:gap-8">
         <motion.button
-          whileHover={{ scale: 1.1, color: "#fbbf24" }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ color: "#9B2335" }}
           onClick={scrollToTop}
-          className="text-xs sm:text-sm font-medium cursor-pointer transition-colors hidden sm:block"
+          className="text-[11px] tracking-widest uppercase text-[#6B5C52] hidden sm:block transition-colors"
         >
           Home
         </motion.button>
-
         <motion.button
-          whileHover={{ scale: 1.1, color: "#fbbf24" }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ color: "#9B2335" }}
           onClick={scrollToStats}
-          className="text-xs sm:text-sm font-medium cursor-pointer transition-colors hidden sm:block"
+          className="text-[11px] tracking-widest uppercase text-[#6B5C52] hidden sm:block transition-colors"
         >
           Stats
         </motion.button>
-
         <motion.button
-          whileHover={{ scale: 1.1, color: "#fbbf24" }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ color: "#9B2335" }}
           onClick={scrollToPrefectures}
-          className="text-xs sm:text-sm font-medium cursor-pointer transition-colors"
+          className="text-[11px] tracking-widest uppercase text-[#6B5C52] transition-colors"
         >
           Explore
         </motion.button>
       </div>
-    </motion.div>
+    </motion.nav>
   );
 };
 

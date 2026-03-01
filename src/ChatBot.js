@@ -8,7 +8,6 @@ export default function ChatBotButton() {
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
-  // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatHistory, loading]);
@@ -28,25 +27,20 @@ export default function ChatBotButton() {
         body: JSON.stringify({ prompt }),
       });
 
-      if (!res.ok) {
-        throw new Error(`Server error: ${res.status} ${res.statusText}`);
-      }
+      if (!res.ok) throw new Error(`Server error: ${res.status} ${res.statusText}`);
 
       const data = await res.json();
-      console.log("API Response:", data); // Debug log
-
       const aiMsg = {
         role: "assistant",
-        content: data.answer || data.response || data.message || "No response received from Groq",
+        content: data.answer || data.response || data.message || "No response received.",
       };
       setChatHistory((prev) => [...prev, aiMsg]);
     } catch (err) {
-      console.error("API Error:", err); // Debug log
       setChatHistory((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: `Error: ${err.message || "Something went wrong. The server might be starting up (Render free tier) or experiencing issues. Please try again in a moment."}`
+          content: `Error: ${err.message || "Something went wrong. Please try again."}`,
         },
       ]);
     }
@@ -58,169 +52,186 @@ export default function ChatBotButton() {
     <>
       <AnimatePresence>
         {!isOpen ? (
+          /* ── FAB ── */
           <motion.button
             key="chat-button"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             exit={{ scale: 0, rotate: 180 }}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-amber-800 to-amber-900 text-white p-5 rounded-full shadow-2xl hover:shadow-amber-800/50 transition-all duration-300 border-2 border-amber-700"
+            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-colors"
+            style={{ backgroundColor: "#1C1917" }}
           >
+            <span className="font-serif text-xl leading-none" style={{ color: "#F5EFE6" }}>
+              話
+            </span>
+            {/* Pulse dot */}
             <motion.div
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 2 }}
-            >
-              <span className="text-3xl">🏯</span>
-            </motion.div>
-            {/* Notification pulse */}
-            <motion.div
-              className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-lg"
-              animate={{ scale: [1, 1.3, 1], opacity: [1, 0.8, 1] }}
+              className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2"
+              style={{ backgroundColor: "#9B2335", borderColor: "#F5EFE6" }}
+              animate={{ scale: [1, 1.35, 1], opacity: [1, 0.75, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </motion.button>
         ) : (
+          /* ── Chat Window ── */
           <motion.div
             key="chat-window"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[420px] sm:h-[650px] z-50 flex flex-col bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 sm:rounded-3xl overflow-hidden shadow-2xl sm:border-2 sm:border-amber-800/60"
+            initial={{ opacity: 0, y: 16, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.97 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[400px] sm:h-[620px] z-50 flex flex-col overflow-hidden shadow-2xl sm:rounded-2xl"
+            style={{
+              backgroundColor: "#F5EFE6",
+              border: "1.5px solid #D5C5B5",
+            }}
           >
             {/* Header */}
-            <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="relative flex items-center justify-between px-5 py-4 bg-gradient-to-r from-amber-900/40 via-amber-800/30 to-amber-900/40 backdrop-blur-xl text-amber-50 border-b border-amber-700/50 shadow-lg"
+            <div
+              className="flex items-center justify-between px-5 py-4"
+              style={{ backgroundColor: "#1C1917", borderBottom: "1px solid #2E2A26" }}
             >
               <div className="flex items-center gap-3">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 5, -5, 0]
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="text-3xl filter drop-shadow-lg"
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center font-serif text-base flex-shrink-0"
+                  style={{ backgroundColor: "#9B2335", color: "#F5EFE6" }}
                 >
-                  🏯
-                </motion.div>
+                  話
+                </div>
                 <div>
-                  <h3 className="font-bold text-lg tracking-wide">NihonKen AI</h3>
+                  <h3 className="font-serif text-base tracking-wide" style={{ color: "#F5EFE6" }}>
+                    NihonKen AI
+                  </h3>
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
-                    <p className="text-xs text-amber-100/80 font-medium">Online</p>
+                    <div
+                      className="w-1.5 h-1.5 rounded-full animate-pulse"
+                      style={{ backgroundColor: "#6BBF8A" }}
+                    />
+                    <p className="text-[10px] tracking-widest uppercase" style={{ color: "#9B9080" }}>
+                      Online
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.15, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
+              <button
                 onClick={() => setIsOpen(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-amber-900/40 hover:bg-amber-800/60 transition-all border border-amber-700/50 shadow-md"
+                className="w-8 h-8 flex items-center justify-center rounded-full transition-colors"
+                style={{ color: "#9B9080" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#F5EFE6")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#9B9080")}
               >
-                <span className="text-2xl font-light text-amber-100">×</span>
-              </motion.button>
-            </motion.div>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
 
-            {/* Chat Messages */}
-            <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-800/40 via-neutral-900 to-neutral-900">
+            {/* Messages */}
+            <div
+              className="flex-1 overflow-y-auto px-4 py-5 space-y-4 text-left"
+              style={{ backgroundColor: "#F5EFE6" }}
+            >
               {chatHistory.length === 0 && (
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-center mt-20 sm:mt-32"
+                  transition={{ delay: 0.15 }}
+                  className="text-center mt-16 sm:mt-24 px-4"
                 >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      rotate: [0, 5, -5, 0]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="text-7xl mb-6 filter drop-shadow-2xl"
+                  <p
+                    className="font-serif text-5xl mb-5 select-none"
+                    style={{ color: "#C4A89A" }}
+                    aria-hidden="true"
                   >
-                    🗾
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-amber-50 mb-2">Welcome to NihonKen AI</h3>
-                  <p className="text-sm text-amber-200/80 mb-1">Ask about Japan's prefectures!</p>
-                  <p className="text-xs text-amber-300/50">Culture • History • Food • Places</p>
+                    日
+                  </p>
+                  <h3 className="font-serif text-xl mb-2" style={{ color: "#1C1917" }}>
+                    Ask about Japan
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#9B9080" }}>
+                    Culture · History · Food · Places
+                  </p>
                 </motion.div>
               )}
 
               {chatHistory.map((msg, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className={`flex items-end gap-2 ${
-                    msg.role === "user" ? "flex-row-reverse" : "flex-row"
-                  }`}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`flex items-end gap-2 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
                 >
                   {/* Avatar */}
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                    className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-xl shadow-lg ${
+                  <div
+                    className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-serif"
+                    style={
                       msg.role === "user"
-                        ? "bg-gradient-to-br from-amber-700 to-amber-900 border-2 border-amber-600"
-                        : "bg-gradient-to-br from-neutral-700 to-neutral-800 border-2 border-amber-700/50"
-                    }`}
+                        ? { backgroundColor: "#1C1917", color: "#F5EFE6" }
+                        : { backgroundColor: "#9B2335", color: "#F5EFE6" }
+                    }
                   >
-                    {msg.role === "user" ? "👤" : "🏯"}
-                  </motion.div>
+                    {msg.role === "user" ? "人" : "話"}
+                  </div>
 
-                  {/* Message Bubble */}
-                  <motion.div
-                    initial={{ opacity: 0, x: msg.role === "user" ? 20 : -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className={`max-w-[80%] p-3.5 rounded-2xl shadow-lg backdrop-blur-sm ${
+                  {/* Bubble */}
+                  <div
+                    className="max-w-[78%] px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words text-left"
+                    style={
                       msg.role === "user"
-                        ? "bg-gradient-to-br from-amber-800/80 to-amber-900/90 text-amber-50 rounded-br-md border border-amber-700/50"
-                        : "bg-gradient-to-br from-neutral-800/90 to-neutral-900/90 text-amber-50 rounded-bl-md border border-amber-700/30"
-                    }`}
+                        ? {
+                            backgroundColor: "#1C1917",
+                            color: "#F5EFE6",
+                            borderRadius: "12px 12px 2px 12px",
+                          }
+                        : {
+                            backgroundColor: "#FDF8F3",
+                            color: "#1C1917",
+                            border: "1px solid #E5D5C8",
+                            borderRadius: "12px 12px 12px 2px",
+                          }
+                    }
                   >
-                    <p className="leading-relaxed text-sm text-left whitespace-pre-wrap break-words">{msg.content}</p>
-                  </motion.div>
+                    {msg.content}
+                  </div>
                 </motion.div>
               ))}
 
-              {/* Loading Animation */}
+              {/* Loading dots */}
               {loading && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-end gap-2"
                 >
-                  <motion.div
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 border-2 border-amber-700/50 flex items-center justify-center text-xl shadow-lg"
+                  <div
+                    className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-serif"
+                    style={{ backgroundColor: "#9B2335", color: "#F5EFE6" }}
                   >
-                    🏯
-                  </motion.div>
-                  <div className="bg-gradient-to-br from-neutral-800/90 to-neutral-900/90 p-4 rounded-2xl rounded-bl-md shadow-lg border border-amber-700/30">
-                    <div className="flex gap-1.5">
-                      <motion.div
-                        className="w-2.5 h-2.5 bg-amber-600 rounded-full shadow-lg shadow-amber-600/50"
-                        animate={{ y: [0, -10, 0], opacity: [1, 0.5, 1] }}
-                        transition={{ duration: 0.8, repeat: Infinity, delay: 0 }}
-                      />
-                      <motion.div
-                        className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"
-                        animate={{ y: [0, -10, 0], opacity: [1, 0.5, 1] }}
-                        transition={{ duration: 0.8, repeat: Infinity, delay: 0.15 }}
-                      />
-                      <motion.div
-                        className="w-2.5 h-2.5 bg-amber-400 rounded-full shadow-lg shadow-amber-400/50"
-                        animate={{ y: [0, -10, 0], opacity: [1, 0.5, 1] }}
-                        transition={{ duration: 0.8, repeat: Infinity, delay: 0.3 }}
-                      />
+                    話
+                  </div>
+                  <div
+                    className="px-4 py-3"
+                    style={{
+                      backgroundColor: "#FDF8F3",
+                      border: "1px solid #E5D5C8",
+                      borderRadius: "12px 12px 12px 2px",
+                    }}
+                  >
+                    <div className="flex gap-1.5 items-center">
+                      {[0, 0.18, 0.36].map((delay, i) => (
+                        <motion.div
+                          key={i}
+                          className="w-2 h-2 rounded-full"
+                          style={{ backgroundColor: "#C4A89A" }}
+                          animate={{ y: [0, -6, 0], opacity: [0.6, 1, 0.6] }}
+                          transition={{ duration: 0.7, repeat: Infinity, delay }}
+                        />
+                      ))}
                     </div>
                   </div>
                 </motion.div>
@@ -229,44 +240,46 @@ export default function ChatBotButton() {
               <div ref={chatEndRef} />
             </div>
 
-            {/* Input Area */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="border-t border-amber-700/40 p-4 bg-gradient-to-t from-neutral-900 via-neutral-800/50 to-neutral-800/30 backdrop-blur-xl"
+            {/* Input */}
+            <div
+              className="px-4 py-3 flex items-center gap-2"
+              style={{
+                borderTop: "1px solid #E5D5C8",
+                backgroundColor: "#F5EFE6",
+              }}
             >
-              <div className="flex items-center gap-2.5">
-                <div className="flex-1 relative">
-                  <input
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && !loading && handleAsk()}
-                    placeholder="Ask about prefectures... 🏯"
-                    disabled={loading}
-                    className="w-full px-5 py-3.5 border-2 border-amber-700/40 rounded-2xl focus:outline-none focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed bg-neutral-900/60 text-amber-50 placeholder-amber-300/40 shadow-inner"
-                  />
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.08, boxShadow: "0 0 20px rgba(245, 158, 11, 0.5)" }}
-                  whileTap={{ scale: 0.92 }}
-                  onClick={handleAsk}
-                  disabled={loading || !prompt.trim()}
-                  className="bg-gradient-to-br from-amber-700 to-amber-900 text-white px-6 py-3.5 rounded-2xl font-semibold shadow-lg hover:shadow-amber-700/50 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 border-2 border-amber-600/50"
-                >
-                  {loading ? (
-                    <motion.span
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="inline-block"
-                    >
-                      ⏳
-                    </motion.span>
-                  ) : (
-                    <span>Send</span>
-                  )}
-                </motion.button>
-              </div>
-            </motion.div>
+              <input
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && !loading && handleAsk()}
+                placeholder="Ask about prefectures…"
+                disabled={loading}
+                className="flex-1 px-4 py-2.5 text-sm focus:outline-none transition-all disabled:opacity-50"
+                style={{
+                  backgroundColor: "#FDF8F3",
+                  color: "#1C1917",
+                  border: "1.5px solid #C4A89A",
+                  borderRadius: "8px",
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "#9B2335")}
+                onBlur={(e) => (e.target.style.borderColor = "#C4A89A")}
+              />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleAsk}
+                disabled={loading || !prompt.trim()}
+                className="px-4 py-2.5 text-sm font-medium tracking-wide transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{
+                  backgroundColor: "#1C1917",
+                  color: "#F5EFE6",
+                  borderRadius: "8px",
+                  minWidth: "56px",
+                }}
+              >
+                {loading ? "…" : "Send"}
+              </motion.button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

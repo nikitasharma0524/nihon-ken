@@ -10,67 +10,67 @@ const Prefecture = ({ name, capital, description, region, index, onViewDetails }
     import(`./images/prefectures/${name}.jpg`)
       .then((img) => setImage(img.default))
       .catch(() =>
-        import(`./images/prefectures/Niigata.jpg`).then((img) =>
-          setImage(img.default)
-        )
+        import(`./images/prefectures/Niigata.jpg`).then((img) => setImage(img.default))
       );
   }, [name]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: "easeOut", delay: (index % 12) * 0.05 }}
-      whileHover={{ y: -8 }}
-      className="group relative bg-neutral-800/90 backdrop-blur-sm w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)] rounded-2xl shadow-xl border border-amber-900/50 hover:border-amber-800/70 flex flex-col justify-between overflow-hidden transition-all"
+      transition={{ duration: 0.55, ease: "easeOut", delay: (index % 12) * 0.04 }}
+      whileHover={{ y: -4 }}
+      className="group relative w-full sm:w-[calc(50%-0.625rem)] md:w-[calc(33.333%-0.875rem)] lg:w-[calc(25%-1rem)] flex flex-col overflow-hidden transition-shadow"
+      style={{
+        backgroundColor: "#FDF8F3",
+        border: "1px solid #E5D5C8",
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#C4A89A")}
+      onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#E5D5C8")}
     >
-      {/* Hover Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10" />
-
-      {/* Image Section */}
-      <div className="relative overflow-hidden">
+      {/* Image */}
+      <div className="relative overflow-hidden aspect-[4/3]">
         {image && (
           <motion.img
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.4 }}
-            className="aspect-[4/3] w-full object-cover rounded-t-2xl"
+            whileHover={{ scale: 1.04 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-full object-cover"
             src={image}
             alt={name}
             loading="lazy"
           />
         )}
-        {/* Region Badge */}
-        <span className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-neutral-800/95 backdrop-blur-sm text-[10px] sm:text-xs font-medium rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg border border-amber-900/50 text-amber-100">
+        {/* Region badge */}
+        <span
+          className="absolute top-2.5 right-2.5 text-[10px] tracking-wide px-2.5 py-1"
+          style={{ backgroundColor: "#F5EFE6", color: "#6B5C52", border: "1px solid #E5D5C8" }}
+        >
           {region}
         </span>
       </div>
 
-      {/* Content Section */}
-      <div className="relative z-20 text-left p-4 sm:p-5 flex-grow">
-        <h3 className="font-bold text-lg sm:text-xl text-amber-50 mb-1">{name}</h3>
-        <div className="flex items-center gap-2 text-xs sm:text-sm text-amber-200">
-          <span className="text-[10px] sm:text-xs">🏛️</span>
-          <span>{capital}</span>
-        </div>
+      {/* Content */}
+      <div className="p-4 sm:p-5 flex-grow">
+        <h3 className="font-serif text-lg sm:text-xl mb-1" style={{ color: "#1C1917" }}>
+          {name}
+        </h3>
+        <p className="text-xs" style={{ color: "#A89080" }}>
+          {capital}
+        </p>
       </div>
 
-      {/* View Details Button */}
-      <div className="relative z-20 mt-auto p-3 sm:p-4 pt-0">
+      {/* View Details */}
+      <div className="px-4 sm:px-5 pb-4 sm:pb-5 mt-auto">
         <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ color: "#9B2335" }}
+          whileTap={{ scale: 0.97 }}
           onClick={onViewDetails}
-          className="w-full py-2.5 sm:py-3 px-3 sm:px-4 bg-amber-900/70 text-amber-50 text-xs sm:text-sm font-medium rounded-full hover:bg-amber-800/80 transition-all duration-300 shadow-md flex items-center justify-center gap-2 group/btn border border-amber-900/50"
+          className="flex items-center gap-1.5 text-xs tracking-wide uppercase transition-colors"
+          style={{ color: "#6B5C52" }}
         >
-          <span>View Details</span>
-          <motion.span
-            className="inline-block"
-            animate={{ x: [0, 3, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            →
-          </motion.span>
+          View Details
+          <span className="text-sm">→</span>
         </motion.button>
       </div>
     </motion.div>
