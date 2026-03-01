@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- cream background -->
+  <rect width="100" height="100" rx="22" fill="#F5EFE6"/>
+
+  <!-- 5 petals, each rotated 72° around center (50,50) -->
+  <!-- Petal shape: rounded ellipse, tip pointing outward -->
+  <g transform="translate(50,50)">
+    <ellipse cx="0" cy="-22" rx="11" ry="19" rx="11" ry="19" fill="#E8799A" opacity="0.92" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="19" fill="#E8799A" opacity="0.92" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="19" fill="#E8799A" opacity="0.92" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="19" fill="#E8799A" opacity="0.92" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="19" fill="#E8799A" opacity="0.92" transform="rotate(288)"/>
+
+    <!-- petal highlight layer (slightly lighter, offset inward) -->
+    <ellipse cx="0" cy="-20" rx="7" ry="13" fill="#F5AEC6" opacity="0.55" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="13" fill="#F5AEC6" opacity="0.55" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="13" fill="#F5AEC6" opacity="0.55" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="13" fill="#F5AEC6" opacity="0.55" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="13" fill="#F5AEC6" opacity="0.55" transform="rotate(288)"/>
+
+    <!-- center -->
+    <circle cx="0" cy="0" r="7" fill="#F5EFE6"/>
+    <circle cx="0" cy="0" r="5" fill="#C04848"/>
+
+    <!-- stamens (5 small dots) -->
+    <circle cx="0"    cy="-9"  r="1.8" fill="#E8B860"/>
+    <circle cx="8.5"  cy="-2.8" r="1.8" fill="#E8B860"/>
+    <circle cx="5.3"  cy="7.3" r="1.8" fill="#E8B860"/>
+    <circle cx="-5.3" cy="7.3" r="1.8" fill="#E8B860"/>
+    <circle cx="-8.5" cy="-2.8" r="1.8" fill="#E8B860"/>
+  </g>
+</svg>
