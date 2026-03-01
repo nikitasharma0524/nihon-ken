@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, lazy, Suspense } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Nav from "./Nav";
-import SectionInfo from "./SectionInfo";
-import Prefectures from "./Prefectures";
-import ChatBotButton from "./ChatBot";
+
+// Lazy load components that aren't immediately visible
+const SectionInfo = lazy(() => import("./SectionInfo"));
+const Prefectures = lazy(() => import("./Prefectures"));
+const ChatBotButton = lazy(() => import("./ChatBot"));
 
 export default function HomePage({ prefectures }) {
   const prefecturesRef = useRef(null);
@@ -31,13 +33,17 @@ export default function HomePage({ prefectures }) {
         className="relative min-h-[85vh] md:min-h-screen overflow-hidden text-white"
       >
         {/* Parallax Background - Main */}
-        <motion.div style={{ y }} className="absolute inset-0 w-full h-[120%]">
+        <motion.div
+          style={{ y, willChange: "transform" }}
+          className="absolute inset-0 w-full h-[120%]"
+        >
           <div
             className="w-full h-full"
             style={{
               backgroundImage: "url('/assets/nihonkenbg.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
+              willChange: "transform",
             }}
           />
         </motion.div>
@@ -46,7 +52,7 @@ export default function HomePage({ prefectures }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.5 }}
+          transition={{ duration: 1.5, delay: 0.3 }}
           className="absolute inset-0 w-full h-full"
         >
           <div
@@ -64,7 +70,7 @@ export default function HomePage({ prefectures }) {
 
         {/* Content */}
         <motion.div
-          style={{ opacity }}
+          style={{ opacity, willChange: "opacity" }}
           className="relative z-10 mx-auto flex h-full min-h-[85vh] max-w-7xl items-center px-4 sm:px-6 md:px-10 text-white"
         >
           <div className="grid w-full grid-cols-1 items-center gap-6 sm:gap-8 md:gap-10 md:grid-cols-2">
@@ -144,12 +150,14 @@ export default function HomePage({ prefectures }) {
         </motion.div>
       </section>
 
-      <ChatBotButton />
-      <SectionInfo />
+      <Suspense fallback={<div className="min-h-screen bg-neutral-900" />}>
+        <ChatBotButton />
+        <SectionInfo />
 
-      <div ref={prefecturesRef}>
-        <Prefectures prefectures={prefectures} />
-      </div>
+        <div ref={prefecturesRef}>
+          <Prefectures prefectures={prefectures} />
+        </div>
+      </Suspense>
     </div>
   );
 }
