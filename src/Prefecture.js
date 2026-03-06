@@ -1,16 +1,14 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 
 const Prefecture = ({ name, capital, description, region, index, onViewDetails }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
   const image = `/images/prefectures/${name}.jpg`;
 
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.55, ease: "easeOut", delay: (index % 12) * 0.04 }}
       whileHover={{ y: -4 }}
       className="group relative w-full sm:w-[calc(50%-0.625rem)] md:w-[calc(33.333%-0.875rem)] lg:w-[calc(25%-1rem)] flex flex-col overflow-hidden transition-shadow"
