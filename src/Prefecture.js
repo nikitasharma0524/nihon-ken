@@ -1,18 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const Prefecture = ({ name, capital, description, region, index, onViewDetails }) => {
-  const [image, setImage] = useState(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    import(`./images/prefectures/${name}.jpg`)
-      .then((img) => setImage(img.default))
-      .catch(() =>
-        import(`./images/prefectures/Niigata.jpg`).then((img) => setImage(img.default))
-      );
-  }, [name]);
+  const image = `/images/prefectures/${name}.jpg`;
 
   return (
     <motion.div
@@ -31,16 +23,14 @@ const Prefecture = ({ name, capital, description, region, index, onViewDetails }
     >
       {/* Image */}
       <div className="relative overflow-hidden aspect-[4/3]">
-        {image && (
-          <motion.img
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.5 }}
-            className="w-full h-full object-cover"
-            src={image}
-            alt={name}
-            loading="lazy"
-          />
-        )}
+        <motion.img
+          whileHover={{ scale: 1.04 }}
+          transition={{ duration: 0.5 }}
+          className="w-full h-full object-cover"
+          src={image}
+          alt={name}
+          loading="lazy"
+        />
         {/* Region badge */}
         <span
           className="absolute top-2.5 right-2.5 text-[10px] tracking-wide px-2.5 py-1"
