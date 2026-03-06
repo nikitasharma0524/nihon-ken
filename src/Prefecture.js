@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const Prefecture = ({ name, capital, description, region, index, onViewDetails }) => {
   const image = `/images/prefectures/${name}.jpg`;
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <motion.div
@@ -21,13 +22,21 @@ const Prefecture = ({ name, capital, description, region, index, onViewDetails }
     >
       {/* Image */}
       <div className="relative overflow-hidden aspect-[4/3]">
+        {!loaded && (
+          <div
+            className="absolute inset-0 animate-pulse"
+            style={{ backgroundColor: "#E5D5C8" }}
+          />
+        )}
         <motion.img
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.5 }}
           className="w-full h-full object-cover"
+          style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.3s ease" }}
           src={image}
           alt={name}
           loading="lazy"
+          onLoad={() => setLoaded(true)}
         />
         {/* Region badge */}
         <span
