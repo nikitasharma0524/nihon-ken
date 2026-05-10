@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 const Prefecture = ({ name, capital, description, region, index, onViewDetails }) => {
   const image = `/images/prefectures/${name}.jpg`;
   const [loaded, setLoaded] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const sentinelRef = useRef(null);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setShouldLoad(true); observer.disconnect(); } },
+      { rootMargin: "800px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <motion.div
+      ref={sentinelRef}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -33,9 +47,8 @@ const Prefecture = ({ name, capital, description, region, index, onViewDetails }
           transition={{ duration: 0.5 }}
           className="w-full h-full object-cover"
           style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.3s ease" }}
-          src={image}
+          src={shouldLoad ? image : undefined}
           alt={name}
-          loading="lazy"
           onLoad={() => setLoaded(true)}
         />
         {/* Region badge */}
