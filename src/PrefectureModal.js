@@ -1,19 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
-  const [image, setImage] = useState(null);
-
-  useEffect(() => {
-    if (!prefecture?.name) return;
-    import(`./images/prefectures/${prefecture.name}.jpg`)
-      .then((img) => setImage(img.default))
-      .catch(() =>
-        import(`./images/prefectures/Niigata.jpg`).then((img) =>
-          setImage(img.default),
-        ),
-      );
-  }, [prefecture]);
+  const image = prefecture ? `/images/prefectures/${prefecture.name}.webp` : null;
 
   if (!isOpen || !prefecture) return null;
 
@@ -58,22 +46,20 @@ const PrefectureModal = ({ isOpen, onClose, prefecture }) => {
             </motion.button>
 
             {/* Image */}
-            {image && (
-              <div className="relative overflow-hidden">
-                <div
-                  className="absolute inset-0 z-[1]"
-                  style={{
-                    background:
-                      "linear-gradient(to bottom, transparent 60%, #FDF8F3)",
-                  }}
-                />
-                <img
-                  src={image}
-                  alt={prefecture.name}
-                  className="w-full h-48 sm:h-60 md:h-72 object-cover"
-                />
-              </div>
-            )}
+            <div className="relative overflow-hidden">
+              <div
+                className="absolute inset-0 z-[1]"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, transparent 60%, #FDF8F3)",
+                }}
+              />
+              <img
+                src={image}
+                alt={prefecture.name}
+                className="w-full h-48 sm:h-60 md:h-72 object-cover"
+              />
+            </div>
 
             {/* Content */}
             <motion.div

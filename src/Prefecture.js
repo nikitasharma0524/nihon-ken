@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 const Prefecture = ({ name, capital, description, region, index, onViewDetails }) => {
-  const image = `/images/prefectures/${name}.jpg`;
+  const image = `/images/prefectures/${name}.webp`;
   const [loaded, setLoaded] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
   const sentinelRef = useRef(null);
